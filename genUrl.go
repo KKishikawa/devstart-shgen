@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
@@ -10,17 +9,17 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-func generate_url(root_path string) string {
+func generate_url(root_path string) (path string, folder string) {
 	// root_pathから絶対パスを取得する
 	abs_path, err := filepath.Abs(root_path)
 	if err != nil {
 		panic(err)
 	}
-	folder := find_workspace_folder(abs_path)
+	wfolder := find_workspace_folder(abs_path)
 	// abs_pathを16進数に変換後、パスを結合する
 	remote_path := "dev-container+" + fmt.Sprintf("%x", abs_path)
 	// abs_pathをURIエンコード後、パスを結合する
-	return "vscode-remote://" + url.QueryEscape(remote_path) + folder
+	return remote_path, wfolder
 }
 
 func find_workspace_folder(root_path string) string {

@@ -11,8 +11,7 @@ func main() {
 	if len(os.Args) > 1 {
 		root_path = os.Args[1]
 	}
-	var devContainerUri = generate_url(root_path)
-	writeSh(devContainerUri)
-	writeBat(devContainerUri)
+	path, folder := generate_url(root_path)
+	writeCodeWorkspace(path, folder)
 	println("Done!")
 }
