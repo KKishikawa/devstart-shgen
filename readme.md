@@ -1,0 +1,1 @@
+This tool generate .code-workspace file which can open devcontainer.
